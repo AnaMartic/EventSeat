@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Početna | EventSeat{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <h2>Organiziraj svoje goste<br>bez stresa</h2>
+
+    <p class="hero-subtitle">
+        Upravljaj gostima, stolovima i rasporedom<br>
+        na jednom mjestu
+    </p>
+
+    <p class="hero-tags">
+        VJENČANJA <span>|</span> DOGAĐAJI
+    </p>
+
+    <div class="image-gallery">
+        <img src="{% static 'images/sala1.jpg' %}" alt="Sala za vjenčanje">
+        <img src="{% static 'images/sala2.jpg' %}" alt="Svadbeni stolovi">
+        <img src="{% static 'images/sala3.jpg' %}" alt="Dekoracija sale">
+    </div>
+</section>
+
+{% endblock %}

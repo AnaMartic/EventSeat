@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}EventSeat{% endblock %}</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Homemade+Apple&display=swap" rel="stylesheet">
+
+<link rel="stylesheet" href="{% static 'css/style.css' %}">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+
+<header class="header">
+    <div class="header-logo-left">
+        <img src="{% static 'images/ilocki_logo.png' %}" alt="Iločki podrumi">
+    </div>
+
+    <div class="header-logo-center">
+        <h1>Event<br>Seat</h1>
+    </div>
+
+    <nav class="nav">
+        <a href="{% url 'home' %}">POČETNA</a>
+        <a href="{% url 'login' %}">PRIJAVA</a>
+    </nav>
+</header>
+
+<main>
+    {% block content %}
+    {% endblock %}
+</main>
+
+<footer class="footer">
+    <div class="footer-socials">
+        <img src="{% static 'images/links.jpg' %}" alt="Povezane aplikacije">
+    </div>
+
+    <div class="footer-logo">
+        <img src="{% static 'images/ilocki_logo_dolje.jpg' %}" alt="Iločki podrumi">
+    </div>
+
+    <div class="footer-text">
+        <p>Vino je ovdje umjetnost<br>i stil života.</p>
+    </div>
+</footer>
+
+</body>
+</html>
