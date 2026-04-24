@@ -384,3 +384,12 @@ main {
 .login-btn:hover {
     background-color: #8a7b52;
 }
+
+
+/* error message */
+.error-msg {
+    color: red;
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+}

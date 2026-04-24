@@ -27,9 +27,16 @@
     </div>
 
     <nav class="nav">
-        <a href="{% url 'home' %}">POČETNA</a>
-        <a href="{% url 'login' %}">PRIJAVA</a>
+        {% if user.is_authenticated %}
+            <a href="#">RASPORED</a>
+            <a href="#">PANO</a>
+            <a href="{% url 'logout' %}">ODJAVA</a>
+        {% else %}
+            <a href="{% url 'home' %}">POČETNA</a>
+            <a href="{% url 'login' %}">PRIJAVA</a>
+        {% endif %}
     </nav>
+    
 </header>
 
 <main>

@@ -9,23 +9,28 @@
     <div class="login-card">
         <h2>Prijava</h2>
 
-        <form class="login-form">
-
+        <form method="POST" class="login-form">
+            {% csrf_token %}
+        
             <label>Korisničko ime</label>
             <div class="input-group">
-                <img src="{% static 'images/user.png' %}" class="input-icon" alt="user">
-                <input type="text" placeholder="">
+                <img src="{% static 'images/user.png' %}" class="input-icon">
+                <input type="text" name="username" required>
             </div>
-
+        
             <label>Zaporka</label>
             <div class="input-group">
-                <img src="{% static 'images/lock.png' %}" class="input-icon" alt="lock">
-                <input type="password">
+                <img src="{% static 'images/lock.png' %}" class="input-icon">
+                <input type="password" name="password" required>
             </div>
+        
             <button type="submit" class="login-btn">Prijavi se</button>
-
+        
+            {% if error %}
+                <p class="error-msg">{{ error }}</p>
+            {% endif %}
+        
             <a href="#" class="forgot">Zaboravili ste zaporku?</a>
-
         </form>
     </div>
 
