@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Raspored stolova{% endblock %}
+
+{% block content %}
+
+<section class="planner-page">
+
+    <aside class="guest-sidebar">
+        <div class="guest-tabs">
+            <span>SVI (0)</span>
+            <span>MLADA (0)</span>
+            <span>MLADOŽENJA (0)</span>
+        </div>
+
+        <div class="add-guest-box">
+            <label>Dodaj gosta</label>
+
+            <div class="guest-input-wrapper">
+                <img src="{% static 'images/user.png' %}" class="input-icon">
+                <input type="text" placeholder="Ime i prezime gosta">
+                <button type="button"><img src="{% static 'images/plus.png' %}" class="input-icon"></button>
+            </div>
+        </div>
+
+        <div class="guest-list-header">
+            <span>Gosti (0)</span>
+            <button type="button">🔍</button>
+        </div>
+
+        <ol class="guest-list">
+            <li>Pero Perić</li>
+        </ol>
+
+        <button class="download-btn">Preuzmi ⬇</button>
+    </aside>
+
+    <div class="planner-center">
+        <div class="canvas-area">
+            <div class="dance-floor">PLESNI PODIJ</div>
+            <div class="newlyweds">MLADENCI</div>
+            <div class="entrance">ULAZ</div>
+        </div>
+    </div>
+
+    <aside class="tool-sidebar">
+        <button type="button">➤</button>
+        <button type="button">◯</button>
+        <button type="button">▭</button>
+        <button type="button">⌫</button>
+    </aside>
+
+</section>
+
+{% endblock %}

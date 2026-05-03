@@ -26,17 +26,22 @@
         <h1>Event<br>Seat</h1>
     </div>
 
-    <nav class="nav">
-        {% if user.is_authenticated %}
-            <a href="#">RASPORED</a>
-            <a href="#">PANO</a>
+<nav class="nav">
+    {% if user.is_authenticated %}
+        {% if user.is_superuser %}
+            <a href="{% url 'admin_dashboard' %}">DASHBOARD</a>
             <a href="{% url 'logout' %}">ODJAVA</a>
         {% else %}
-            <a href="{% url 'home' %}">POČETNA</a>
-            <a href="{% url 'login' %}">PRIJAVA</a>
+            <a href="{% url 'seating_plan' %}">RASPORED</a>
+            <a href="#">PANO</a>
+            <a href="{% url 'logout' %}">ODJAVA</a>
         {% endif %}
-    </nav>
-    
+    {% else %}
+        <a href="{% url 'home' %}">POČETNA</a>
+        <a href="{% url 'login' %}">PRIJAVA</a>
+    {% endif %}
+</nav>
+
 </header>
 
 <main>
@@ -58,5 +63,6 @@
     </div>
 </footer>
 
+<script src="{% static 'js\admin.js' %}"></script>
 </body>
 </html>

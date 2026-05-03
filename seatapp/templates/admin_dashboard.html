@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Admin Dashboard{% endblock %}
+
+{% block content %}
+
+<section class="admin-section">
+
+    <div class="admin-top">
+        <form method="GET" class="admin-search">
+            <img src="{% static 'images/user.png' %}" class="input-icon">
+            <input type="text" name="q" placeholder="Naziv događaja ili datum" value="{{ query }}">
+            <button type="submit"><img src="{% static 'images/search.png' %}" class="input-icon"></button>
+        </form>
+
+        <a href="#" class="add-event-btn" id="openModal"><img src="{% static 'images/plus.png' %}" class="input-icon"></a>
+    </div>
+
+<div class="admin-table">
+
+    {% for event in events %}
+        <div class="admin-row">
+            <div>{{ event.name }} | {{ event.date|date:"d-m-Y" }} | {{ event.user.username }}</div>
+
+            <div><button class="table-link">Raspored sjedenja</button></div>
+            <div><button class="table-link">Popis gostiju</button></div>
+
+            <div>
+                <button 
+                    type="button"
+                    class="table-link edit-btn"
+                    data-id="{{ event.id }}"
+                    data-name="{{ event.name }}"
+                    data-date="{{ event.date|date:'Y-m-d' }}"
+                    data-username="{{ event.user.username }}"
+                >
+                    Uredi
+                </button>
+            </div>
+
+            <div>
+                <form method="POST" class="delete-form">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="delete">
+                    <input type="hidden" name="event_id" value="{{ event.id }}">
+                    <button type="submit" class="delete-btn">Obriši</button>
+                </form>
+            </div>
+        </div>
+    {% empty %}
+        <p class="empty-message">Nema događaja.</p>
+    {% endfor %}
+
+</div>
+
+<div class="modal-overlay {% if error %}active{% endif %}" id="addModal">
+    <div class="modal-box">
+        <button class="modal-close" id="closeModal">×</button>
+
+        <h2>Dodaj korisnika i event</h2>
+
+<form method="POST">
+    {% csrf_token %}
+
+    <input type="hidden" name="action" id="modalAction" value="create">
+    <input type="hidden" name="event_id" id="eventId">
+
+    <label>Korisničko ime</label>
+    <input type="text" name="username" id="usernameInput" required>
+
+    <label>Privremena lozinka</label>
+    <input type="password" name="password" id="passwordInput">
+
+    <label>Naziv eventa</label>
+    <input type="text" name="event_name" id="eventNameInput" required>
+
+    <label>Datum eventa</label>
+    <input type="date" name="event_date" id="eventDateInput" required>
+
+    {% if error %}
+        <p class="error-msg">{{ error }}</p>
+    {% endif %}
+
+    <button type="submit" class="login-btn" id="modalSubmitBtn">Kreiraj</button>
+</form>
+    </div>
+</div>
+
+</section>
+
+{% endblock %}
