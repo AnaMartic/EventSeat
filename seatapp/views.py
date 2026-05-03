@@ -3,7 +3,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth import logout
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.shortcuts import render
-from .models import Event
+from .models import Event, Guest
 from django.db.models import Q
 from django.contrib.auth.models import User
 
@@ -124,4 +124,35 @@ def admin_dashboard(request):
 
 @login_required
 def seating_plan(request):
-    return render(request, 'seating_plan.html')
+    event = Event.objects.get(user=request.user)
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+
+        if action == 'delete_guest':
+            guest_id = request.POST.get('guest_id')
+            Guest.objects.filter(id=guest_id, event=event).delete()
+
+        else:
+            full_name = request.POST.get('full_name', '').strip()
+
+            if full_name:
+                exists = Guest.objects.filter(
+                    event=event,
+                    full_name__iexact=full_name
+                ).exists()
+
+                if not exists:
+                    Guest.objects.create(
+                        event=event,
+                        full_name=full_name
+                    )
+
+        return redirect('seating_plan')
+
+    guests = Guest.objects.filter(event=event)
+
+    return render(request, 'seating_plan.html', {
+        'event': event,
+        'guests': guests,
+    })

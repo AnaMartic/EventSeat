@@ -8,32 +8,68 @@
 <section class="planner-page">
 
     <aside class="guest-sidebar">
-        <div class="guest-tabs">
-            <span>SVI (0)</span>
-            <span>MLADA (0)</span>
-            <span>MLADOŽENJA (0)</span>
-        </div>
-
         <div class="add-guest-box">
             <label>Dodaj gosta</label>
-
-            <div class="guest-input-wrapper">
+        
+            <form method="POST" class="guest-input-wrapper">
+                {% csrf_token %}
+            
                 <img src="{% static 'images/user.png' %}" class="input-icon">
-                <input type="text" placeholder="Ime i prezime gosta">
-                <button type="button"><img src="{% static 'images/plus.png' %}" class="input-icon"></button>
-            </div>
+            
+                <input 
+                    type="text" 
+                    name="full_name" 
+                    placeholder="Ime i prezime gosta"
+                    required
+                >
+            
+                <button type="submit"><img src="{% static 'images/plus.png' %}" class="input-icon"></button>
+            </form>
         </div>
 
         <div class="guest-list-header">
-            <span>Gosti (0)</span>
-            <button type="button">🔍</button>
+        
+            <span>Gosti ({{ guests.count }})</span>
+        
+            <div class="search-wrapper">
+                <input 
+                    type="text" 
+                    id="guestSearch" 
+                    class="guest-search-input hidden"
+                    placeholder="Pretraži"
+                >
+            
+                <img 
+                    src="{% static 'images/search.png' %}" 
+                    id="searchIcon" 
+                    class="search-icon"
+                >
+            </div>
+        
         </div>
 
-        <ol class="guest-list">
-            <li>Pero Perić</li>
-        </ol>
+        <ul class="guest-list" id="guestList">
+            {% for guest in guests %}
+                <li class="guest-item">
+                    <span class="guest-number">{{ forloop.counter }}.</span>
+                
+                    <div class="guest-content">
+                        <span>{{ guest.full_name }}</span>
+                    
+                        <form method="POST" class="delete-guest-form">
+                            {% csrf_token %}
+                            <input type="hidden" name="action" value="delete_guest">
+                            <input type="hidden" name="guest_id" value="{{ guest.id }}">
+                            <button type="submit" class="delete-guest-btn">×</button>
+                        </form>
+                    </div>
+                </li>
+            {% empty %}
+                <li class="empty-guests">Nema dodanih gostiju.</li>
+            {% endfor %}
+        </ul> 
 
-        <button class="download-btn">Preuzmi ⬇</button>
+        <button class="download-btn">Preuzmi <img src="{% static 'images\download.png' %}" class="input-icon"></button>
     </aside>
 
     <div class="planner-center">
@@ -45,10 +81,10 @@
     </div>
 
     <aside class="tool-sidebar">
-        <button type="button">➤</button>
-        <button type="button">◯</button>
-        <button type="button">▭</button>
-        <button type="button">⌫</button>
+        <button type="button"><img src="{% static 'images\cursor.png' %}" class="input-icon"></button>
+        <button type="button"><img src="{% static 'images\round-table.png' %}" class="input-icon"></button>
+        <button type="button"><img src="{% static 'images\dining-room.png' %}" class="input-icon"></button>
+        <button type="button"><img src="{% static 'images\eraser.png' %}" class="input-icon"></button>
     </aside>
 
 </section>

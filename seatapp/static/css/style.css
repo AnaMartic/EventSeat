@@ -735,3 +735,113 @@ main {
         min-width: 700px;
     }
 }
+
+/* dodavanje gostiju na raspored*/
+.empty-guests {
+    list-style: none;
+    letter-spacing: 1px;
+    color: #555;
+}
+
+.guest-search-input {
+    width: 100%;
+    margin-top: 10px;
+    padding: 10px 12px;
+    border: none;
+    outline: none;
+    border-radius: 8px;
+    background: #eeeeee;
+    font-size: 15px;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-icon {
+    width: 20px;
+    cursor: pointer;
+}
+
+.guest-search-input {
+    position: absolute;
+    right: 30px;
+    width: 0;
+    opacity: 0;
+    padding: 8px;
+    padding-bottom: 20px;
+    border-radius: 8px;
+    border: none;
+    outline: none;
+    background: #eeeeee;
+
+    background: transparent;
+    box-shadow: none; 
+    transition: 0.3s;
+}
+
+.guest-search-input.active {
+    width: 140px;
+    opacity: 1;
+}
+
+.guest-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.delete-guest-form {
+    margin: 0;
+}
+
+.delete-guest-btn {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.delete-guest-form {
+    margin: 0;
+}
+
+.delete-guest-btn {
+    border: none;
+    background: transparent;
+    font-size: 20px;
+    cursor: pointer;
+}
+.guest-list {
+    max-height: 500px;
+    overflow-y: auto;
+    padding-left: 0;
+    padding-right: 8px;
+    list-style: none;
+}
+
+.guest-item {
+    display: grid;
+    grid-template-columns: 45px 1fr;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.guest-number {
+    text-align: right;
+    padding-right: 10px;
+}
+
+.guest-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 600px) {
+    .guest-item {
+        grid-template-columns: 36px 1fr;
+    }
+}
